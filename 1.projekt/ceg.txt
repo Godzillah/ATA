@@ -1,0 +1,35 @@
+Causes:
+
+t_1: Voziku trva cesta ku nakladu menej ako 1 minutu ( <= 1m )
+t_2: Voziku trva cesta ku nakladu viac ako 1 minutu ( > 1m )
+1: Pozaduje sa premiestnenie nakladu z jedneho miesta do druheho
+2: Vozik naklada prioritny naklad
+
+4: Vozik nenalozi vsetok prioritny naklad
+5: Vozik prechadza okolo zastavky
+6: Vozik ma obsadene sloty
+7: Vozik jeho naklad presiahne maximalnu kapacitu
+
+Effects:
+71: Vozik si vyzdvihne naklad
+72: Prepne sa do rezimu pouze_nakladka
+70: Vozik nastavuje sa prioritna vlastnost
+73: Vozik zostava v rezime pouze_nakladka
+77: Vozik vyklada naklad
+78: Vozik naklada naklad
+79: Neakceptuje naklad v dobe zadania poziadavkue
+
+Rules:
+100 = !6
+101 = !7
+102 = 100 || 101
+71 = 102 && t_1 && 1
+70 = 102 && t_2 && 1
+72 = 2
+73 = 102 && 4
+79 = 6 || 7
+77 = 5
+78 = 5
+
+Constraints:
+O: t_1, t_2     // voziku bud trva cesta menej alebo viac ako 1m
